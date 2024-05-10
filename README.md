@@ -14,6 +14,8 @@ pnpm dev
 bun dev
 ```
 
+coreta [https://www.tldraw.com/r/w-HwXf2PbosKeBWixU3gM?v=-499,-793,1808,1637&p=page](Coretan)
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
