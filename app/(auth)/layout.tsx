@@ -1,12 +1,20 @@
 import Logo from "@/components/Logo";
+import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
 
-export default function AuthLayout({
+export default async function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user = await currentUser();
+
+  if (user) {
+    return redirect('/')
+  }
+
   return (
     <div className="w-full lg:grid lg:grid-cols-2 h-screen">
       <div className="flex flex-col gap-2 items-center justify-center py-12">

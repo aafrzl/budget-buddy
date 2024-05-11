@@ -41,7 +41,7 @@ function MobileNavbar() {
               variant={"ghost"}
               size={"icon"}
             >
-              <Menu size={16} />
+              <Menu className="w-8 h-8 shrink-0" />
             </Button>
           </SheetTrigger>
           <SheetContent
@@ -91,7 +91,17 @@ function DesktopNavbar() {
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <UserButton afterSignOutUrl="/sign-in" />
+          <UserButton
+            afterSignOutUrl="/sign-in"
+            appearance={{
+              elements: {
+                avatarBox: {
+                  width: 40,
+                  height: 40,
+                },
+              },
+            }}
+          />
         </div>
       </nav>
     </div>
@@ -128,7 +138,7 @@ function NavbarItem({
         {label}
       </Link>
       {isActive && (
-        <div className="absolute -bottom-[2px] left-1/2 hidden h-[2px] w-[80%] -translate-x-1/2 rounded-xl bg-foreground md:block" />
+        <div className="absolute -bottom-[2px] left-1/2 hidden h-[2px] w-[80%] -translate-x-1/2 rounded-xl dark:bg-primary bg-emerald-500 md:block" />
       )}
     </div>
   );
