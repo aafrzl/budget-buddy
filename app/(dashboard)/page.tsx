@@ -1,9 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import CreateTransactionDialog from "./_components/CreateTransactionDialog";
-import { Button } from "@/components/ui/button";
-import { Minus, Plus } from "lucide-react";
 import GreetingsDashboard from "./_components/GreetingsDashboard";
+import Overview from "./_components/Overview";
 
 export default async function Home() {
   const user = await currentUser();
@@ -15,6 +13,7 @@ export default async function Home() {
   return (
     <div className="h-full bg-background">
       <GreetingsDashboard firstName={user.firstName || "Unknown"} />
+      <Overview />
     </div>
   );
 }
