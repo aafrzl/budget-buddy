@@ -79,7 +79,7 @@ function DesktopNavbar() {
       <nav className="container flex items-center justify-between gap-x-4">
         <Logo />
         <div className="flex h-[80px] min-h-[60px] items-center gap-x-4">
-          <div className="flex h-full">
+          <div className="flex h-full gap-x-2">
             {items.map((item) => (
               <NavbarItem
                 key={item.label}
