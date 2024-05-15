@@ -81,6 +81,21 @@ export default function CreateTransactionDialog({ type, trigger }: Props) {
 
       setOpen((prev) => !prev);
     },
+    onError: (error) => {
+      toast.error(error.message, {
+        id: "create-transaction",
+      });
+
+      form.reset({
+        type,
+        description: "",
+        amount: 0,
+        date: new Date(),
+        category: undefined,
+      });
+
+      setOpen((prev) => !prev);
+    },
   });
 
   const handleCategoryChange = useCallback(
