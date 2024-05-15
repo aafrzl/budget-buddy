@@ -1,8 +1,12 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -16,6 +20,12 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { DateToUTCDate } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
 import {
   CreateTransactionSchemaType,
@@ -23,8 +33,13 @@ import {
 } from "@/schema/transaction";
 import { TransactionType } from "@/types/transaction";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { CalendarIcon, Loader } from "lucide-react";
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { CreateTransaction } from "../_actions/transactions";
 import CategoryPicker from "./CategoryPicker";
 
 interface Props {
@@ -43,11 +58,50 @@ export default function CreateTransactionDialog({ type, trigger }: Props) {
     },
   });
 
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: CreateTransaction,
+    onSuccess: () => {
+      toast.success("Transaksi berhasil dibuat 🎉", {
+        id: "create-transaction",
+      });
+
+      form.reset({
+        type,
+        description: "",
+        amount: 0,
+        date: new Date(),
+        category: undefined,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["overview"],
+      });
+
+      setOpen((prev) => !prev);
+    },
+  });
+
   const handleCategoryChange = useCallback(
     (value: string) => {
       form.setValue("category", value);
     },
     [form]
+  );
+
+  const onSubmit = useCallback(
+    (data: CreateTransactionSchemaType) => {
+      toast.loading("Sedang membuat transaksi...", {
+        id: "create-transaction",
+      });
+
+      mutate({
+        ...data,
+        date: DateToUTCDate(data.date),
+      });
+    },
+    [mutate]
   );
 
   return (
@@ -72,7 +126,10 @@ export default function CreateTransactionDialog({ type, trigger }: Props) {
           </DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form className="space-y-4">
+          <form
+            className="space-y-4"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
             <FormField
               control={form.control}
               name="description"
@@ -127,9 +184,67 @@ export default function CreateTransactionDialog({ type, trigger }: Props) {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Tanggal Transaksi</FormLabel>
+                    <FormControl>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[200px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value
+                              ? format(field.value, "dd MMMM yyyy")
+                              : "Pilih tanggal"}
+                            <CalendarIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </FormControl>
+                    <FormDescription>
+                      Pilih tanggal transaksinya
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
             </div>
           </form>
         </Form>
+        <DialogFooter>
+          <DialogClose>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => form.reset()}
+            >
+              Batal
+            </Button>
+          </DialogClose>
+          <Button
+            onClick={form.handleSubmit(onSubmit)}
+            disabled={isPending}
+          >
+            {isPending && (
+              <Loader className="shrink-0 h-4 w-4 mr-2 animate-spin" />
+            )}
+            {isPending ? "Membuat..." : "Buat"}
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

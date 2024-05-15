@@ -29,7 +29,7 @@ model Transaction {
   createAt DateTime @default(now())
   updateAt DateTime @default(now())
 
-  amout       String
+  amount      Float
   description String
   date        DateTime
   userId      String
