@@ -20,8 +20,6 @@ export async function CreateTransaction(form: CreateTransactionSchemaType) {
 
   const { amount, description, date, category, type } = parsedBody.data;
 
-  console.log(parsedBody.data);
-
   const categoryRow = await prisma.category.findFirst({
     where: {
       userId: user.id,
