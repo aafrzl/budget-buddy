@@ -14,7 +14,9 @@ pnpm dev
 bun dev
 ```
 
-coretan [https://www.tldraw.com/ro/tjqJys49K5QmUSjzABty_?v=-491,960,3749,1857&p=page](Coretan)
+//TODO: Make card income, expense & balance overview show data from database
+
+coretan [https://www.tldraw.com/ro/tjqJys49K5QmUSjzABty\_?v=-491,960,3749,1857&p=page](Coretan)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

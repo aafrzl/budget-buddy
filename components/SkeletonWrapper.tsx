@@ -10,7 +10,7 @@ interface Props {
 
 export default function SkeletonWrapper({
   isLoading,
-  fullWidth,
+  fullWidth = true,
   children,
 }: Props) {
   if (!isLoading) return children;
