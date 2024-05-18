@@ -6,6 +6,7 @@ import { differenceInDays, startOfMonth } from "date-fns";
 import { useState } from "react";
 import { toast } from "sonner";
 import StatsCards from "./StatsCards";
+import CategoriesStats from "./CategoriesStats";
 
 export default function Overview() {
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date }>({
@@ -40,6 +41,11 @@ export default function Overview() {
       </div>
       <div className="container flex w-full flex-col gap-2">
         <StatsCards
+          from={dateRange.from}
+          to={dateRange.to}
+        />
+
+        <CategoriesStats
           from={dateRange.from}
           to={dateRange.to}
         />
