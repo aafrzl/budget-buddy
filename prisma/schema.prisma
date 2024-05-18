@@ -25,9 +25,9 @@ model Category {
 }
 
 model Transaction {
-  id       String   @id @default(uuid())
-  createAt DateTime @default(now())
-  updateAt DateTime @default(now())
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updateAt  DateTime @default(now())
 
   amount      Float
   description String
