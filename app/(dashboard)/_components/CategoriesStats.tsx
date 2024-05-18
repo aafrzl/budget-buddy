@@ -109,7 +109,7 @@ function CategoriesCard({
                     <Progress
                       value={percentage}
                       indicator={
-                        type === "income" ? "bg-green-500" : "bg-rose-500"
+                        type === "income" ? "bg-green-600" : "bg-rose-600"
                       }
                     />
                   </div>
