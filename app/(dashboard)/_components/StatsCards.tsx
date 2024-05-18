@@ -54,7 +54,7 @@ export default function StatsCards({ from, to }: StatsCardsProps) {
         <StatCard
           formatter={formatter}
           value={balance}
-          title="Total"
+          title="Saldo Akhir"
           icon={
             <Wallet className="h-12 w-12 items-center rounded-lg p-2 text-blue-500 bg-blue-400/10" />
           }
