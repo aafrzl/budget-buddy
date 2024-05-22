@@ -43,8 +43,8 @@ export default function HistoryPeriodSelector({
           onValueChange={(value) => setTimeframe(value as Timeframe)}
         >
           <TabsList>
-            <TabsTrigger value="year">Tahun</TabsTrigger>
-            <TabsTrigger value="month">Bulan</TabsTrigger>
+            <TabsTrigger value="year">Tahunan</TabsTrigger>
+            <TabsTrigger value="month">Bulanan</TabsTrigger>
           </TabsList>
         </Tabs>
       </SkeletonWrapper>
