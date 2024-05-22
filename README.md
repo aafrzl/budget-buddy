@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-coretan [https://www.tldraw.com/ro/tjqJys49K5QmUSjzABty\_?v=-491,960,3749,1857&p=page](Coretan)
+coretan [https://www.tldraw.com/ro/tjqJys49K5QmUSjzABty\_?v=-491,960,3749,1857&p=page](https://www.tldraw.com/ro/tjqJys49K5QmUSjzABty_?v=-491,960,3749,1857&p=page)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
