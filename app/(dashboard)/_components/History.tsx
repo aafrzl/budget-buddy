@@ -20,8 +20,6 @@ import {
 import { cn } from "@/lib/utils";
 import CountUp from "react-countup";
 
-//TODO: Implement rechart with history data
-
 export default function History() {
   const [timeframe, setTimeframe] = useState<Timeframe>("month");
   const [period, setPeriod] = useState<Period>({

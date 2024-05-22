@@ -46,9 +46,14 @@ import { Category } from "@prisma/client";
 interface Props {
   type: TransactionType;
   successCallback: (category: Category) => void;
+  trigger?: React.ReactNode;
 }
 
-export default function CreateCategoryDialog({ type, successCallback }: Props) {
+export default function CreateCategoryDialog({
+  type,
+  successCallback,
+  trigger,
+}: Props) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const form = useForm<CreateCategorySchemaType>({
@@ -104,13 +109,17 @@ export default function CreateCategoryDialog({ type, successCallback }: Props) {
       onOpenChange={setOpen}
     >
       <DialogTrigger asChild>
-        <Button
-          variant={"ghost"}
-          className="rounded-none"
-        >
-          <PlusCircle className="shrink-0 mr-2 h-4 w-4" />
-          Tambah Kategori
-        </Button>
+        {trigger ? (
+          trigger
+        ) : (
+          <Button
+            variant={"ghost"}
+            className="rounded-none"
+          >
+            <PlusCircle className="shrink-0 mr-2 h-4 w-4" />
+            Tambah Kategori
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
