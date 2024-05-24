@@ -122,7 +122,7 @@ export default function History() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid
-                    strokeDasharray={"3 3"}
+                    strokeDasharray={"5 5"}
                     strokeOpacity={"0.2"}
                     vertical={false}
                   />
