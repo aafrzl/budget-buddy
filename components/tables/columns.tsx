@@ -76,7 +76,7 @@ export const columns: ColumnDef<TransactionHistoryRow>[] = [
           row.original.type === "income" && "bg-green-400/10 text-green-500"
         )}
       >
-        {row.original.type}
+        {row.original.type === "expense" ? "pengeluaran" : "pemasukan"}
       </div>
     ),
   },
