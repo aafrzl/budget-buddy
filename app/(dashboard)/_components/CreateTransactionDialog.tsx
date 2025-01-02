@@ -49,6 +49,7 @@ interface Props {
 
 export default function CreateTransactionDialog({ type, trigger }: Props) {
   const [open, setOpen] = useState(false);
+  const [openCalendar, setOpenCalendar] = useState(false);
 
   const form = useForm<CreateTransactionSchemaType>({
     resolver: zodResolver(transactionSchema),
@@ -209,8 +210,14 @@ export default function CreateTransactionDialog({ type, trigger }: Props) {
                     <FormItem className="flex flex-col w-full">
                       <FormLabel>Tanggal Transaksi</FormLabel>
                       <FormControl>
-                        <Popover modal={false}>
-                          <PopoverTrigger asChild>
+                        <Popover
+                          open={openCalendar}
+                          modal={false}
+                        >
+                          <PopoverTrigger
+                            asChild
+                            onClick={() => setOpenCalendar(!openCalendar)}
+                          >
                             <Button
                               variant={"outline"}
                               className={cn(
