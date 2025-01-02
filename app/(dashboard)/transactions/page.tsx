@@ -21,18 +21,23 @@ export default function TransactionPage() {
               Lihat riwayat transaksi yang telah kamu lakukan
             </p>
           </div>
-          <DateRangePicker
-            initialDateFrom={dateRange.from}
-            initialDateTo={dateRange.to}
-            showCompare={false}
-            onUpdate={(values) => {
-              const { from, to } = values.range;
+          <div className="flex flex-col gap-2">
+            <p className="text-sm text-muted-foreground">
+              Pilih periode untuk melihat riwayat transaksi
+            </p>
+            <DateRangePicker
+              initialDateFrom={dateRange.from}
+              initialDateTo={dateRange.to}
+              showCompare={false}
+              onUpdate={(values) => {
+                const { from, to } = values.range;
 
-              if (!from || !to) return;
+                if (!from || !to) return;
 
-              setDateRange({ from, to });
-            }}
-          />
+                setDateRange({ from, to });
+              }}
+            />
+          </div>
         </div>
       </div>
       <div className="container py-10">

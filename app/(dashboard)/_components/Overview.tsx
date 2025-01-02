@@ -17,19 +17,24 @@ export default function Overview() {
       <div className="container flex flex-wrap items-end justify-between gap-2 py-6">
         <h2 className="text-3xl font-bold">Overview</h2>
         <div className="flex items-center gap-3">
-          <DateRangePicker
-            initialDateFrom={dateRange.from}
-            initialDateTo={dateRange.to}
-            showCompare={false}
-            align="start"
-            onUpdate={(values) => {
-              const { from, to } = values.range;
+          <div className="flex flex-col gap-2">
+            <p className="text-sm text-muted-foreground">
+              Pilih periode untuk melihat statistik keuangan
+            </p>
+            <DateRangePicker
+              initialDateFrom={dateRange.from}
+              initialDateTo={dateRange.to}
+              showCompare={false}
+              align="start"
+              onUpdate={(values) => {
+                const { from, to } = values.range;
 
-              if (!from || !to) return;
+                if (!from || !to) return;
 
-              setDateRange({ from, to });
-            }}
-          />
+                setDateRange({ from, to });
+              }}
+            />
+          </div>
         </div>
       </div>
       <div className="container flex w-full flex-col gap-2">
