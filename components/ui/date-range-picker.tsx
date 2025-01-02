@@ -333,7 +333,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
 
   return (
     <Popover
-      modal={true}
+      modal={false}
       open={isOpen}
       onOpenChange={(open: boolean) => {
         if (!open) {
@@ -375,6 +375,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
       </PopoverTrigger>
       <PopoverContent
         align={align}
+        side="bottom"
         className="w-auto"
       >
         <div className="flex py-2">
@@ -420,7 +421,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
                     <Label htmlFor="compare-mode">Compare</Label>
                   </div>
                 )}
-                <div className="flex flex-col gap-2">
+                {/* <div className="flex flex-col gap-2">
                   <div className="flex gap-2">
                     <DateInput
                       value={range.from}
@@ -489,7 +490,7 @@ export const DateRangePicker: FC<DateRangePickerProps> & {
                       />
                     </div>
                   )}
-                </div>
+                </div> */}
               </div>
               {isSmallScreen && (
                 <Select

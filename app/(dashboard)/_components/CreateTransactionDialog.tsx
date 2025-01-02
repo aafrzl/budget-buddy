@@ -125,7 +125,7 @@ export default function CreateTransactionDialog({ type, trigger }: Props) {
       onOpenChange={setOpen}
     >
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className="flex flex-col items-center justify-center w-11/12 sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
             Buat transaksi
@@ -140,112 +140,120 @@ export default function CreateTransactionDialog({ type, trigger }: Props) {
             baru
           </DialogTitle>
         </DialogHeader>
-        <Form {...form}>
-          <form
-            className="space-y-4"
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Deskripsi</FormLabel>
-                  <FormControl>
-                    <Input
-                      defaultValue=""
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Isikan deskripsi transaksi (opsional)
-                  </FormDescription>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="amount"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Jumlah {type === "income" ? "pemasukan" : "pengeluaran"}
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      defaultValue={0}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>Tentukan jumlah transaksi</FormDescription>
-                </FormItem>
-              )}
-            />
-            <div className="flex items-center justify-between gap-2">
+        <div className="w-11/12 sm:max-w-md">
+          <Form {...form}>
+            <form
+              className="space-y-4"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
               <FormField
                 control={form.control}
-                name="category"
+                name="description"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>Kategori</FormLabel>
+                  <FormItem>
+                    <FormLabel>Deskripsi</FormLabel>
                     <FormControl>
-                      <CategoryPicker
-                        type={type}
-                        onChange={handleCategoryChange}
+                      <Input
+                        defaultValue=""
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Isikan deskripsi transaksi (opsional)
+                    </FormDescription>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="amount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Jumlah {type === "income" ? "pemasukan" : "pengeluaran"}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        defaultValue={0}
+                        {...field}
                       />
                     </FormControl>
                     <FormDescription>Tentukan jumlah transaksi</FormDescription>
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>Tanggal Transaksi</FormLabel>
-                    <FormControl>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant={"outline"}
-                            className={cn(
-                              "w-[200px] pl-3 text-left font-normal",
-                              !field.value && "text-muted-foreground"
-                            )}
+              <div className="flex flex-col md:flex-row justify-between gap-2">
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col w-full">
+                      <FormLabel>Kategori</FormLabel>
+                      <FormControl>
+                        <CategoryPicker
+                          type={type}
+                          onChange={handleCategoryChange}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Tentukan jumlah transaksi
+                      </FormDescription>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col w-full">
+                      <FormLabel>Tanggal Transaksi</FormLabel>
+                      <FormControl>
+                        <Popover modal={false}>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-full pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value
+                                ? format(field.value, "dd MMMM yyyy")
+                                : "Pilih tanggal"}
+                              <CalendarIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent
+                            side="bottom"
+                            className="w-auto p-0"
                           >
-                            {field.value
-                              ? format(field.value, "dd MMMM yyyy")
-                              : "Pilih tanggal"}
-                            <CalendarIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
-                    </FormControl>
-                    <FormDescription>
-                      Pilih tanggal transaksinya
-                    </FormDescription>
-                  </FormItem>
-                )}
-              />
-            </div>
-          </form>
-        </Form>
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
+                      </FormControl>
+                      <FormDescription>
+                        Pilih tanggal transaksinya
+                      </FormDescription>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </form>
+          </Form>
+        </div>
         <DialogFooter>
           <DialogClose>
             <Button
               type="button"
               variant="outline"
               onClick={() => form.reset()}
+              className="w-full"
             >
               Batal
             </Button>
@@ -253,6 +261,7 @@ export default function CreateTransactionDialog({ type, trigger }: Props) {
           <Button
             onClick={form.handleSubmit(onSubmit)}
             disabled={isPending}
+            className="w-full"
           >
             {isPending && (
               <Loader className="shrink-0 h-4 w-4 mr-2 animate-spin" />

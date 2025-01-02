@@ -23,6 +23,7 @@ export default function Overview() {
             initialDateFrom={dateRange.from}
             initialDateTo={dateRange.to}
             showCompare={false}
+            align="start"
             onUpdate={(values) => {
               const { from, to } = values.range;
 

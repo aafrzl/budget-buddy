@@ -13,11 +13,12 @@ export default function GreetingsDashboard({ firstName }: Props) {
       <div className="container flex flex-wrap items-center justify-between gap-6 py-8">
         <p className="text-3xl font-bold">Hello, {firstName}!👋🏼</p>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col md:flex-row gap-3 w-full">
           <CreateTransactionDialog
             type="income"
             trigger={
-              <Button>
+              <Button
+              >
                 <Plus className="shrink-0 mr-2 h-4 w-4" />
                 Tambah Pemasukan 🤑
               </Button>

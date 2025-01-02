@@ -209,12 +209,13 @@ export default function CreateCategoryDialog({
             />
           </form>
         </Form>
-        <DialogFooter>
+        <DialogFooter className="gap-4">
           <DialogClose>
             <Button
               type="button"
               variant="outline"
               onClick={() => form.reset()}
+              className="w-full"
             >
               Batal
             </Button>

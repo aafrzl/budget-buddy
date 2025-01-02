@@ -61,7 +61,7 @@ export default function CategoryPicker({ type, onChange }: Props) {
           variant={"outline"}
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-full justify-between"
         >
           {selectedCategory ? (
             <CategoryRow category={selectedCategory} />
@@ -71,7 +71,7 @@ export default function CategoryPicker({ type, onChange }: Props) {
           <ChevronsDownUp className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-full p-0">
         <Command
           onSubmit={(e) => {
             e.preventDefault();
