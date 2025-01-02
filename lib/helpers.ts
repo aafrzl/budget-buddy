@@ -1,17 +1,17 @@
 export function DateToUTCDate(date: Date) {
-  return new Date(
+  const utcDate = new Date(
     Date.UTC(
       date.getFullYear(),
       date.getMonth(),
       date.getDate(),
-      date.getHours(),
-      date.getMinutes(),
-      date.getSeconds(),
-      date.getMilliseconds()
+      0, // Set time to 00:00:00
+      0,
+      0,
+      0
     )
   );
+  return utcDate;
 }
-
 export function GetFormattedForCurrency(currency: string) {
   const locale = "id-ID";
 

@@ -1,12 +1,10 @@
 "use client";
 
 import { DateRangePicker } from "@/components/ui/date-range-picker";
-import { MAX_DATE_RANGE_DAYS } from "@/lib/constants";
-import { differenceInDays, startOfMonth } from "date-fns";
+import { startOfMonth } from "date-fns";
 import { useState } from "react";
-import { toast } from "sonner";
-import StatsCards from "./StatsCards";
 import CategoriesStats from "./CategoriesStats";
+import StatsCards from "./StatsCards";
 
 export default function Overview() {
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date }>({
@@ -28,12 +26,6 @@ export default function Overview() {
               const { from, to } = values.range;
 
               if (!from || !to) return;
-              if (differenceInDays(from, to) > MAX_DATE_RANGE_DAYS) {
-                toast.error(
-                  `Tanggal awal dan akhir tidak boleh lebih dari ${MAX_DATE_RANGE_DAYS} hari`
-                );
-                return;
-              }
 
               setDateRange({ from, to });
             }}
